@@ -1,0 +1,22 @@
+install cf-cli
+SCP Cockpit: register as developer
+
+# Install pip package manager
+install pip3
+pip3 install virtualenv
+
+# install pip requirements
+pip install pipreqs
+
+# generate requirements.txt
+pipreqs --force .  # --force to override existing file
+
+# test locally, try to use python-3.5.5
+virtualenv -p python3 venv
+source venv/bin/activate
+pip install -r requirements.txt
+python hellowolrd.py
+
+# deploy application to cloud
+echo venv/ > .cfignore  # don't push venv/
+cf push
