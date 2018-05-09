@@ -1,6 +1,7 @@
 from flask import Flask, request
 from flask_restful import Resource, Api
 import os
+from quickstart import getData
 
 # from restapi import TodoSimple
 
@@ -26,8 +27,13 @@ class TodoSimple(Resource):
 		print(request.form['data'])
 		todos[todo_id] = request.form['data']
 		return {todo_id: todos[todo_id]}
+		
+class HanaDbMockUp(Resource):
+	def get(self):
+		return getData()
 
 api.add_resource(TodoSimple, '/TODO/<string:todo_id>')
+api.add_resource(HanaDbMockUp, '/myhana')
 
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=port)
