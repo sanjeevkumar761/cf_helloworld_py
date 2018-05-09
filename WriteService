@@ -1,0 +1,38 @@
+from flask import Flask, request
+from flask_restful import Resource, Api
+import os
+from quickstart import getData
+
+# from restapi import TodoSimple
+
+app = Flask(__name__)
+api = Api(app)
+
+port = int(os.getenv("PORT", 9009))
+
+
+
+todos = {
+    '1':  'My first task.',
+    '2':  'Remeber the milk.'
+}
+	
+class DataWriter(Resource):
+	def put(self):
+		f1 = request.form['BusinessTransActionID']
+		f2 = request.form['SourceSystem']
+		f3 = request.form['PostingDate']
+		f4 = request.form['Account']
+		f5 = request.form['ExternalContract']
+		f6 = request.form['TransactionAmount']
+
+		print (f1, f2, f3, f4, f5, f6)
+
+		return {"OK"}
+		
+
+api.add_resource(DataWriter, '/write')
+
+
+if __name__ == '__main__':
+    app.run(host='0.0.0.0', port=port)
