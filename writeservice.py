@@ -2,8 +2,10 @@ from flask import Flask, request
 from flask_restful import Resource, Api
 import os
 from quickstart import getData
+import json
 
 # from restapi import TodoSimple
+
 
 app = Flask(__name__)
 api = Api(app)
@@ -28,6 +30,37 @@ class DataWriter(Resource):
 		f6 = request.form['TransactionAmount']
 
 		print (f1,f2,f3,f4,f5,f6)
+
+
+
+
+
+		#specify url
+		url = 'my URL'
+
+		token = "my token"
+		data = request.form
+
+		headers = {'Authorization': 'Bearer ' + token, "Content-Type": "application/json", data:data}
+
+		#Call REST API
+		#response = requests.put(url, data=data, headers=headers)
+
+		#Print Response
+		#print(response.text)
+
+
+
+		tmpStr = '{"uri": "https://preemeahana3aa2814455.hana.ondemand.com/SwissRE/swissredbservice/TRANS_FX.xsodata/TRANS_FX","headers": [ { "name": "content-type", "value": "application/json" } ],                          "method": "POST", "auth": { "user": "SRADMIN", "pass": "London123", "sendImmediately": true },"json": { "ACCOUNT" : "CASH", "BUSINESSTRANSACTIONID" : "123", "EXTERNALCONTRACT" : "ACOUNT02", "FX_RATE" : "null", "POSTINGDATE" : "/Date(1525651200000)/", "SOURCESYSTEM" : "SRS", "TRANSACTIONAMOUNT" : "100", "TRANSACTION_CURR_ISO" : "CHF", "TRANSLATEDAMOUNT" : " ", "TRANSLATED_CURR_ISO" : "" } }'
+		options = json.loads(tmpStr)
+		print (options)
+
+
+
+
+
+
+
 
 		return "OK"
 
